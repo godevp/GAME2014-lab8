@@ -30,7 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-       // leftStick = (Application.isMobilePlatform) ? GameObject.Find("LeftStick").GetComponent<Joystick>() : null;
+        leftStick = GameObject.Find("LeftStick").GetComponent<Joystick>();
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Move()
     {
-        var x = Input.GetAxisRaw("Horizontal") + ((Application.isMobilePlatform) ? leftStick.Horizontal : 0.0f);
+        var x = Input.GetAxisRaw("Horizontal") + leftStick.Horizontal;
 
         if (x != 0.0f)
         {
@@ -70,7 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Jump()
     {
-        var y = Input.GetAxis("Jump") + ((Application.isMobilePlatform) ? leftStick.Vertical : 0.0f);
+        var y = Input.GetAxis("Jump") + leftStick.Vertical;
 
         if ((isGrounded) && (y > verticalThreshold))
         {
